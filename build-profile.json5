@@ -1,6 +1,20 @@
 {
   "app": {
-    "signingConfigs": [],
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "C:\\Users\\admin\\.ohos\\config\\auto_debug_HarmonyDemo_com.hxb.harmonydemo_37722667.cer",
+          "storePassword": "0000001BDA2D94691EBA33988BDF5CF623B1A250AE705D172B11BB31E687610B8FB6F166DF6468F4701EF4",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001B99454D0352A8E7763154DBC6F8643D0F8FFDF2FE9D0B5B5F51141A20CEAA78A4D32B7EC3A39FD6",
+          "profile": "C:\\Users\\admin\\.ohos\\config\\auto_debug_HarmonyDemo_com.hxb.harmonydemo_37722667.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "C:\\Users\\admin\\.ohos\\config\\auto_debug_HarmonyDemo_com.hxb.harmonydemo_37722667.p12"
+        }
+      }
+    ],
     "compileSdkVersion": 9,
     "compatibleSdkVersion": 9,
     "products": [
@@ -14,6 +28,18 @@
     {
       "name": "entry",
       "srcPath": "./entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "app_base_lib",
+      "srcPath": "./app_base_lib",
       "targets": [
         {
           "name": "default",

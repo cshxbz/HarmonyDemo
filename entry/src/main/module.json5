@@ -32,6 +32,51 @@
           }
         ]
       }
+    ],
+
+    //权限
+    "requestPermissions":[
+      {
+        "name" : "ohos.permission.INTERNET",
+        "reason": "$string:get_permission_reason",
+        "usedScene": {
+          "abilities": [
+            "EntryAbility"
+          ],
+          "when":"inuse"
+        }
+      },
+//      {
+//        "name" : "ohos.permission.FILE_ACCESS_MANAGER",
+//        "reason": "$string:get_permission_reason",
+//        "usedScene": {
+//          "abilities": [
+//            "EntryAbility"
+//          ],
+//          "when":"always"
+//        }
+//      },
+//      {
+//        "name" : "ohos.permission.LOCATION",
+//        "reason": "$string:get_permission_reason",
+//        "usedScene": {
+//          "abilities": [
+//            "EntryAbility"
+//          ],
+//          "when":"always"
+//        }
+//      },
+//      {
+//        "name" : "ohos.permission.CAMERA",
+//        "reason": "$string:get_permission_reason",
+//        "usedScene": {
+//          "abilities": [
+//            "EntryAbility"
+//          ],
+//          "when":"always"
+//        }
+//      }
     ]
+
   }
 }

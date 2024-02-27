@@ -1,0 +1,10 @@
+{
+  "name": "app_base_lib",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "./src/main/ets/Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+  }
+}
