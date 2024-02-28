@@ -1,19 +1,43 @@
 import common from '@ohos.app.ability.common';
 import hilog from '@ohos.hilog';
 import router from '@ohos.router';
+import promptAction from '@ohos.promptAction';
+import { logUtil } from 'app_base_lib'
 
 @Entry
 @Component
 struct MainPage {
-  private static logTag = "MainPage"
+  private readonly logTag = "MainPage"
   private context = getContext(this) as common.UIAbilityContext;
   private readonly itemArr: FeatureItem[] = [
     new FeatureItem("基础UI组件", 'pages/SampleUiWidget'),
     new FeatureItem("异步任务", 'pages/AsyncTaskTest'),
-    new FeatureItem("权限申请", ''),
-    new FeatureItem("事件总线", ''),
+    new FeatureItem("权限申请", 'pages/PermissionsTest'),
+    new FeatureItem("事件总线", 'pages/EventHubTest'),
     new FeatureItem("文件下载", ''),
   ]
+
+  aboutToAppear() {
+    logUtil.i(this.logTag, ">> aboutToAppear")
+    //订阅事件
+    this.context.eventHub.on("test_event", (...data) => {
+      promptAction.showToast({ message: `MainPage received test_event -- ${data}` })
+    })
+  }
+
+  aboutToDisappear() {
+    logUtil.i(this.logTag, ">> aboutToDisappear")
+    //取消订阅事件
+    this.context.eventHub.off("test_event")
+  }
+
+  onPageShow() {
+    logUtil.i(this.logTag, ">> onPageShow")
+  }
+
+  onPageHide() {
+    logUtil.i(this.logTag, ">> onPageHide")
+  }
 
   build() {
     Column() {
@@ -21,7 +45,7 @@ struct MainPage {
       List({ space: 10, initialIndex: 0 }) {
         ForEach(this.itemArr, (item: FeatureItem, index: number) => {
           ListItem() {
-            Text(`${index}-${item.name}`)
+            Text(item.name)
               .padding({ top: 20, bottom: 20 })
               .fontSize(15)
               .borderRadius(10)
@@ -30,7 +54,7 @@ struct MainPage {
               .textAlign(TextAlign.Center)
               .backgroundColor(Color.White)
               .onClick(() => {
-                hilog.info(0, MainPage.logTag, "%{public}s", `clicked -- ${item.name}`)
+                hilog.info(0, this.logTag, "%{public}s", `clicked -- ${item.name}`)
                 jumpToPage(this.context, item.pageUrl)
               })
           }

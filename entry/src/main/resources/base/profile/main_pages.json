@@ -2,6 +2,8 @@
   "src": [
     "pages/MainPage",
     "pages/SampleUiWidget",
-    "pages/AsyncTaskTest"
+    "pages/AsyncTaskTest",
+    "pages/EventHubTest",
+    "pages/PermissionsTest"
   ]
 }

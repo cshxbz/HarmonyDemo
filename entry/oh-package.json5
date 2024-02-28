@@ -6,5 +6,8 @@
   "description": "Please describe the basic information.",
   "main": "",
   "version": "1.0.0",
-  "dependencies": {}
+  "dependencies": {
+    "app_base_lib": "file:../app_base_lib"
+  },
+
 }
