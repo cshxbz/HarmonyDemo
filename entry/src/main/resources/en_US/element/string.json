@@ -15,6 +15,14 @@
     {
       "name": "get_permission_reason",
       "value": "需要获取此权限"
+    },
+    {
+      "name": "EntryFormAbility_desc",
+      "value": "form_description"
+    },
+    {
+      "name": "EntryFormAbility_label",
+      "value": "form_label"
     }
   ]
 }

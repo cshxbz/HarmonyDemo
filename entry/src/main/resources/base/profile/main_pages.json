@@ -4,6 +4,7 @@
     "pages/SampleUiWidget",
     "pages/AsyncTaskTest",
     "pages/EventHubTest",
-    "pages/PermissionsTest"
+    "pages/PermissionsTest",
+    "pages/FileDownloadTest"
   ]
 }

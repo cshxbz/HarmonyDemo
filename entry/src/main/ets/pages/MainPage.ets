@@ -14,7 +14,7 @@ struct MainPage {
     new FeatureItem("异步任务", 'pages/AsyncTaskTest'),
     new FeatureItem("权限申请", 'pages/PermissionsTest'),
     new FeatureItem("事件总线", 'pages/EventHubTest'),
-    new FeatureItem("文件下载", ''),
+    new FeatureItem("文件下载", 'pages/FileDownloadTest'),
   ]
 
   aboutToAppear() {
