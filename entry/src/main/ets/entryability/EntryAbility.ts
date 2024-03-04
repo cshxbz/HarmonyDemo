@@ -1,8 +1,9 @@
 import UIAbility from '@ohos.app.ability.UIAbility';
 import hilog from '@ohos.hilog';
 import window from '@ohos.window';
-// import socket from '@ohos.net.socket';
+import socket from '@ohos.net.socket';
 import { logUtil } from 'app_base_lib/src/main/ets/utils/LogUtil';
+import rpc from '@ohos.rpc';
 
 export default class EntryAbility extends UIAbility {
   private logTag: string = "EntryAbility"
@@ -14,6 +15,8 @@ export default class EntryAbility extends UIAbility {
   onCreate(want, launchParam) {
     logUtil.i(this.logTag, "onCreate")
 
+    this.calleeOnAll()
+
     this.context.eventHub.on('custom_event', (...data) => {
       let strArr = data as string[]
       hilog.info(0x0000, this.logTag, this.logFormat, strArr.toString())
@@ -23,8 +26,16 @@ export default class EntryAbility extends UIAbility {
 
   }
 
-  testFun() {
 
+  calleeOnAll() {
+    this.callee.on('funA', (data) => {
+
+      return null
+    });
+  }
+
+  calleeOffAll() {
+    this.callee.off("funA")
   }
 
   onNewWant(want, launchParam) {
@@ -71,6 +82,7 @@ export default class EntryAbility extends UIAbility {
 
   onDestroy() {
     logUtil.i(this.logTag, "onDestroy")
+
   }
 
   onWindowStageCreate(windowStage: window.WindowStage) {
@@ -96,52 +108,49 @@ export default class EntryAbility extends UIAbility {
   }
 
 
-  // async socketSendMessage() {
-  //   logUtil.i(this.logTag, "send start")
-  //
-  //   try {
-  //     await this.tcpSocket.send({
-  //       data: 'abc',
-  //       encoding: 'utf-8'
-  //     })
-  //   } catch (e) {
-  //     logUtil.i(this.logTag, `send error : ${e}`)
-  //   }
-  //
-  //   logUtil.i(this.logTag, "send end")
-  // }
+  async socketSendMessage() {
+    logUtil.i(this.logTag, "send start")
 
-  // private tcpSocket: socket.TCPSocket = null
-  //
-  // createTCPSocketConnect() {
-  //   // 创建TCPSocket
-  //   this.tcpSocket = socket.constructTCPSocketInstance();
-  //   // 订阅TCPSocket相关的订阅事件
-  //   this.tcpSocket.on('message', value => {
-  //     logUtil.i(this.logTag, 'on message')
-  //     let buffer = value.message
-  //     let dataView = new DataView(buffer)
-  //     let str = ""
-  //     for (let i = 0; i < dataView.byteLength; ++i) {
-  //       str += String.fromCharCode(dataView.getUint8(i))
-  //     }
-  //     logUtil.i(this.logTag, "on connect received:" + str)
-  //   });
-  //   this.tcpSocket.on('connect', () => {
-  //     logUtil.i(this.logTag, 'on connect')
-  //   });
-  //   this.tcpSocket.on('close', () => {
-  //     logUtil.i(this.logTag, 'on close')
-  //   });
-  //
-  //   this.tcpSocket.bind({
-  //     address: 'localhost', family: 1, port: 8765
-  //   }, (err, data) => {
-  //     logUtil.i(this.logTag, `tcpSocket.bind err: ${err}} data: ${data}}`)
-  //   })
-  //
-  // }
+    try {
+      await this.tcpSocket.send({
+        data: 'abc',
+        encoding: 'utf-8'
+      })
+    } catch (e) {
+      logUtil.i(this.logTag, `send error : ${e}`)
+    }
 
+    logUtil.i(this.logTag, "send end")
+  }
 
+  private tcpSocket: socket.TCPSocket = null
 
+  createTCPSocketConnect() {
+    // 创建TCPSocket
+    this.tcpSocket = socket.constructTCPSocketInstance();
+    // 订阅TCPSocket相关的订阅事件
+    this.tcpSocket.on('message', value => {
+      logUtil.i(this.logTag, 'on message')
+      let buffer = value.message
+      let dataView = new DataView(buffer)
+      let str = ""
+      for (let i = 0; i < dataView.byteLength; ++i) {
+        str += String.fromCharCode(dataView.getUint8(i))
+      }
+      logUtil.i(this.logTag, "on connect received:" + str)
+    });
+    this.tcpSocket.on('connect', () => {
+      logUtil.i(this.logTag, 'on connect')
+    });
+    this.tcpSocket.on('close', () => {
+      logUtil.i(this.logTag, 'on close')
+    });
+
+    this.tcpSocket.bind({
+      address: 'localhost', family: 1, port: 8765
+    }, (err, data) => {
+      logUtil.i(this.logTag, `tcpSocket.bind err: ${err}} data: ${data}}`)
+    })
+
+  }
 }
