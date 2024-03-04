@@ -1,24 +1,10 @@
 @Entry
 @Component
 struct WidgetCard {
-  /*
-   * The action type.
-   */
-  readonly ACTION_TYPE: string = 'router';
-
-  /*
-   * The ability name.
-   */
-  readonly ABILITY_NAME: string = 'EntryAbility';
-
-  /*
-   * The message.
-   */
-  readonly MESSAGE: string = 'add detail';
 
   build() {
-    Column() {
-      Row({space:10}) {
+    Column({ space: 10 }) {
+      Row({ space: 10 }) {
         Text('1')
           .width('100%')
           .height('100%')
@@ -26,6 +12,9 @@ struct WidgetCard {
           .borderRadius(10)
           .layoutWeight(1)
           .textAlign(TextAlign.Center)
+          .onClick(() => {
+            this.postCardActionToJumpPage('pages/SampleUiWidget')
+          })
         Text('2')
           .width('100%')
           .height('100%')
@@ -33,6 +22,9 @@ struct WidgetCard {
           .borderRadius(10)
           .layoutWeight(1)
           .textAlign(TextAlign.Center)
+          .onClick(() => {
+            this.postCardActionToJumpPage('pages/AsyncTaskTest')
+          })
         Text('3')
           .width('100%')
           .height('100%')
@@ -40,6 +32,9 @@ struct WidgetCard {
           .borderRadius(10)
           .layoutWeight(1)
           .textAlign(TextAlign.Center)
+          .onClick(() => {
+            this.postCardActionToJumpPage('pages/EventHubTest')
+          })
         Text('4')
           .width('100%')
           .height('100%')
@@ -47,12 +42,57 @@ struct WidgetCard {
           .borderRadius(10)
           .layoutWeight(1)
           .textAlign(TextAlign.Center)
+          .onClick(() => {
+            this.postCardActionToJumpPage('pages/PermissionsTest')
+          })
       }
       .layoutWeight(1)
       .width('100%')
-      .margin({top:10,left:10,right:10})
 
-      Row() {
+      Row({ space: 10 }) {
+        Text('5')
+          .width('100%')
+          .height('100%')
+          .backgroundColor(Color.White)
+          .borderRadius(10)
+          .layoutWeight(1)
+          .textAlign(TextAlign.Center)
+          .onClick(() => {
+            this.postCardActionToJumpPage('pages/FileDownloadTest')
+          })
+        Text('6')
+          .width('100%')
+          .height('100%')
+          .backgroundColor(Color.White)
+          .borderRadius(10)
+          .layoutWeight(1)
+          .textAlign(TextAlign.Center)
+          .onClick(() => {
+
+
+            postCardAction(this, {
+              'action': 'message',
+              'params': {
+                'msgTest': 'messageEvent'
+              }
+            });
+
+
+          })
+        Text('7')
+          .width('100%')
+          .height('100%')
+          .backgroundColor(Color.White)
+          .borderRadius(10)
+          .layoutWeight(1)
+          .textAlign(TextAlign.Center)
+        Text('8')
+          .width('100%')
+          .height('100%')
+          .backgroundColor(Color.White)
+          .borderRadius(10)
+          .layoutWeight(1)
+          .textAlign(TextAlign.Center)
 
       }
       .layoutWeight(1)
@@ -60,18 +100,8 @@ struct WidgetCard {
     }
     .width('100%')
     .height('100%')
+    .padding(15)
     .backgroundColor('#c0c0c0')
-  }
-
-
-  @Builder
-  ToolItem(text: string) {
-    Text(text)
-      .width('100%')
-      .height('100%')
-      .backgroundColor(Color.White)
-      .borderRadius(10)
-      .layoutWeight(1)
   }
 
   postCardActionToJumpPage(pageUrl: string) {

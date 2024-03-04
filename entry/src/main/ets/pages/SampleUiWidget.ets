@@ -1,6 +1,7 @@
 import common from '@ohos.app.ability.common';
 import hilog from '@ohos.hilog';
 import promptAction from '@ohos.promptAction';
+import image from '@ohos.multimedia.image';
 
 @Entry
 @Component
@@ -8,6 +9,9 @@ struct SampleUiWidget {
   private readonly logTag = "SampleUiWidget"
   private context = getContext(this) as common.UIAbilityContext;
   @State private count: number = 0
+  @State private textA: string = 'A'
+  @State private textB: string = 'B'
+  @State private textC: string = 'C'
 
   build() {
     Column() {
@@ -35,10 +39,26 @@ struct SampleUiWidget {
           this.count++
         })
 
-      Image($r('app.media.icon'))
-        .margin({ top: 20 })
-        .width(100)
-        .height(100)
+      Row() {
+        IconTextItem({ image: $r('app.media.app_icon'), text: this.textA })
+          .layoutWeight(1)
+          .onClick(() => {
+            this.textA = 'X'
+          })
+        IconTextItem({ image: $r('app.media.app_icon'), text: this.textB })
+          .layoutWeight(1)
+          .onClick(() => {
+            this.textB = 'X'
+          })
+        IconTextItem({ image: $r('app.media.app_icon'), text: this.textC })
+          .layoutWeight(1)
+          .onClick(() => {
+            this.textC = 'X'
+          })
+      }
+      .width('100%')
+      .margin({ top: 30 })
+      .alignItems(VerticalAlign.Center)
 
     }
     .width('100%')
@@ -48,6 +68,27 @@ struct SampleUiWidget {
   }
 }
 
+
+@Component
+struct IconTextItem {
+  image: string | PixelMap | Resource
+  text: string
+
+  build() {
+    Column() {
+      Image(this.image)
+        .width(100)
+        .height(100)
+
+      Text(this.text)
+        .fontColor(Color.Black)
+        .fontSize(20)
+        .margin({ top: 10 })
+    }
+    .alignItems(HorizontalAlign.Center)
+  }
+
+}
 
 
 function showToast() {
@@ -59,6 +100,5 @@ function showToast() {
   } catch (error) {
     console.error(`showToast args error code is ${error.code}, message is ${error.message}`);
   }
-  ;
 }
 

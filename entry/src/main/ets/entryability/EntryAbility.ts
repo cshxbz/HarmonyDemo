@@ -1,7 +1,7 @@
 import UIAbility from '@ohos.app.ability.UIAbility';
 import hilog from '@ohos.hilog';
 import window from '@ohos.window';
-import socket from '@ohos.net.socket';
+// import socket from '@ohos.net.socket';
 import { logUtil } from 'app_base_lib/src/main/ets/utils/LogUtil';
 
 export default class EntryAbility extends UIAbility {
@@ -64,7 +64,7 @@ export default class EntryAbility extends UIAbility {
         logUtil.i(this.logTag, `loadContent -- failed ${err}`)
         return;
       }
-      logUtil.i(this.logTag, `loadContent -- success ${err}`)
+      logUtil.i(this.logTag, `loadContent -- success`)
     });
 
   }
@@ -96,49 +96,52 @@ export default class EntryAbility extends UIAbility {
   }
 
 
-  async socketSendMessage() {
-    logUtil.i(this.logTag, "send start")
+  // async socketSendMessage() {
+  //   logUtil.i(this.logTag, "send start")
+  //
+  //   try {
+  //     await this.tcpSocket.send({
+  //       data: 'abc',
+  //       encoding: 'utf-8'
+  //     })
+  //   } catch (e) {
+  //     logUtil.i(this.logTag, `send error : ${e}`)
+  //   }
+  //
+  //   logUtil.i(this.logTag, "send end")
+  // }
 
-    try {
-      await this.tcpSocket.send({
-        data: 'abc',
-        encoding: 'utf-8'
-      })
-    } catch (e) {
-      logUtil.i(this.logTag, `send error : ${e}`)
-    }
+  // private tcpSocket: socket.TCPSocket = null
+  //
+  // createTCPSocketConnect() {
+  //   // 创建TCPSocket
+  //   this.tcpSocket = socket.constructTCPSocketInstance();
+  //   // 订阅TCPSocket相关的订阅事件
+  //   this.tcpSocket.on('message', value => {
+  //     logUtil.i(this.logTag, 'on message')
+  //     let buffer = value.message
+  //     let dataView = new DataView(buffer)
+  //     let str = ""
+  //     for (let i = 0; i < dataView.byteLength; ++i) {
+  //       str += String.fromCharCode(dataView.getUint8(i))
+  //     }
+  //     logUtil.i(this.logTag, "on connect received:" + str)
+  //   });
+  //   this.tcpSocket.on('connect', () => {
+  //     logUtil.i(this.logTag, 'on connect')
+  //   });
+  //   this.tcpSocket.on('close', () => {
+  //     logUtil.i(this.logTag, 'on close')
+  //   });
+  //
+  //   this.tcpSocket.bind({
+  //     address: 'localhost', family: 1, port: 8765
+  //   }, (err, data) => {
+  //     logUtil.i(this.logTag, `tcpSocket.bind err: ${err}} data: ${data}}`)
+  //   })
+  //
+  // }
 
-    logUtil.i(this.logTag, "send end")
-  }
 
-  private tcpSocket: socket.TCPSocket = null
 
-  createTCPSocketConnect() {
-    // 创建TCPSocket
-    this.tcpSocket = socket.constructTCPSocketInstance();
-    // 订阅TCPSocket相关的订阅事件
-    this.tcpSocket.on('message', value => {
-      logUtil.i(this.logTag, 'on message')
-      let buffer = value.message
-      let dataView = new DataView(buffer)
-      let str = ""
-      for (let i = 0; i < dataView.byteLength; ++i) {
-        str += String.fromCharCode(dataView.getUint8(i))
-      }
-      logUtil.i(this.logTag, "on connect received:" + str)
-    });
-    this.tcpSocket.on('connect', () => {
-      logUtil.i(this.logTag, 'on connect')
-    });
-    this.tcpSocket.on('close', () => {
-      logUtil.i(this.logTag, 'on close')
-    });
-
-    this.tcpSocket.bind({
-      address: 'localhost', family: 1, port: 8765
-    }, (err, data) => {
-      logUtil.i(this.logTag, `tcpSocket.bind err: ${err}} data: ${data}}`)
-    })
-
-  }
 }

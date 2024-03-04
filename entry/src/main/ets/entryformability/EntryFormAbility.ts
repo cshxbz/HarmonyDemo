@@ -2,6 +2,8 @@ import formInfo from '@ohos.app.form.formInfo';
 import formBindingData from '@ohos.app.form.formBindingData';
 import FormExtensionAbility from '@ohos.app.form.FormExtensionAbility';
 import { logUtil } from 'app_base_lib'
+import Prompt from '@system.prompt';
+import promptAction from '@ohos.promptAction';
 
 export default class EntryFormAbility extends FormExtensionAbility {
   private readonly logTag: string = "EntryFormAbility"
@@ -29,8 +31,7 @@ export default class EntryFormAbility extends FormExtensionAbility {
   }
 
   onFormEvent(formId, message) {
-    logUtil.i(this.logTag, 'onFormEvent')
-    // Called when a specified message event defined by the form provider is triggered.
+    logUtil.i(this.logTag, `onFormEvent -- formId: ${formId}  message: ${message}`)
   }
 
   onRemoveForm(formId) {
