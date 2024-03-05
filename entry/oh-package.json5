@@ -7,7 +7,6 @@
   "main": "",
   "version": "1.0.0",
   "dependencies": {
-    "app_base_lib": "file:../app_base_lib"
-  },
-
+    "app_base_lib": "file:../app_base_lib",
+  }
 }

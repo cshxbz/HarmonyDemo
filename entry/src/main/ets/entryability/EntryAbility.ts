@@ -3,7 +3,7 @@ import hilog from '@ohos.hilog';
 import window from '@ohos.window';
 import socket from '@ohos.net.socket';
 import { logUtil } from 'app_base_lib/src/main/ets/utils/LogUtil';
-import rpc from '@ohos.rpc';
+
 
 export default class EntryAbility extends UIAbility {
   private logTag: string = "EntryAbility"
@@ -14,6 +14,8 @@ export default class EntryAbility extends UIAbility {
 
   onCreate(want, launchParam) {
     logUtil.i(this.logTag, "onCreate")
+
+
 
     this.calleeOnAll()
 
@@ -29,7 +31,7 @@ export default class EntryAbility extends UIAbility {
 
   calleeOnAll() {
     this.callee.on('funA', (data) => {
-
+      logUtil.i(this.logTag, `onFunA -- dataType: ${typeof data}`)
       return null
     });
   }

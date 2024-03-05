@@ -54,7 +54,6 @@ struct MainPage {
               .textAlign(TextAlign.Center)
               .backgroundColor(Color.White)
               .onClick(() => {
-                hilog.info(0, this.logTag, "%{public}s", `clicked -- ${item.name}`)
                 jumpToPage(this.context, item.pageUrl)
               })
           }

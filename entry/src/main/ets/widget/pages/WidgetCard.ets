@@ -1,6 +1,8 @@
 @Entry
 @Component
 struct WidgetCard {
+  private fontSize: number = 10
+
   build() {
     Column({ space: 10 }) {
       Row({ space: 10 }) {
@@ -10,7 +12,7 @@ struct WidgetCard {
           .backgroundColor(Color.White)
           .borderRadius(10)
           .layoutWeight(1)
-          .fontSize(8)
+          .fontSize(this.fontSize)
           .textAlign(TextAlign.Center)
           .onClick(() => {
             this.postCardActionToJumpPage('pages/SampleUiWidget')
@@ -20,7 +22,7 @@ struct WidgetCard {
           .height('100%')
           .backgroundColor(Color.White)
           .borderRadius(10)
-          .fontSize(8)
+          .fontSize(this.fontSize)
           .layoutWeight(1)
           .textAlign(TextAlign.Center)
           .onClick(() => {
@@ -31,7 +33,7 @@ struct WidgetCard {
           .height('100%')
           .backgroundColor(Color.White)
           .borderRadius(10)
-          .fontSize(8)
+          .fontSize(this.fontSize)
           .layoutWeight(1)
           .textAlign(TextAlign.Center)
           .onClick(() => {
@@ -42,7 +44,7 @@ struct WidgetCard {
           .height('100%')
           .backgroundColor(Color.White)
           .borderRadius(10)
-          .fontSize(8)
+          .fontSize(this.fontSize)
           .layoutWeight(1)
           .textAlign(TextAlign.Center)
           .onClick(() => {
@@ -58,7 +60,7 @@ struct WidgetCard {
           .height('100%')
           .backgroundColor(Color.White)
           .borderRadius(10)
-          .fontSize(8)
+          .fontSize(this.fontSize)
           .layoutWeight(1)
           .textAlign(TextAlign.Center)
           .onClick(() => {
@@ -80,10 +82,12 @@ struct WidgetCard {
           .height('100%')
           .backgroundColor(Color.White)
           .borderRadius(10)
-          .fontSize(8)
+          .fontSize(this.fontSize)
           .layoutWeight(1)
           .textAlign(TextAlign.Center)
           .onClick(() => {
+
+            //发送message事件
             postCardAction(this, {
               'action': 'message',
               'params': {
@@ -98,7 +102,7 @@ struct WidgetCard {
           .height('100%')
           .backgroundColor(Color.White)
           .borderRadius(10)
-          .fontSize(8)
+          .fontSize(this.fontSize)
           .layoutWeight(1)
           .textAlign(TextAlign.Center)
         Text('8')
@@ -106,7 +110,7 @@ struct WidgetCard {
           .height('100%')
           .backgroundColor(Color.White)
           .borderRadius(10)
-          .fontSize(8)
+          .fontSize(this.fontSize)
           .layoutWeight(1)
           .textAlign(TextAlign.Center)
 

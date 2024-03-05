@@ -8,7 +8,7 @@ import image from '@ohos.multimedia.image';
 struct SampleUiWidget {
   private readonly logTag = "SampleUiWidget"
   private context = getContext(this) as common.UIAbilityContext;
-  @State private count: number = 0
+  @State private tiModel: CountTextModel = { textColor: Color.Black, count: 0 }
   @State private textA: string = 'A'
   @State private textB: string = 'B'
   @State private textC: string = 'C'
@@ -28,32 +28,38 @@ struct SampleUiWidget {
         .margin(20)
         .visibility(Visibility.Visible)
 
-      Text(`click to change count ${this.count}`)
+      Text(`click to change count ${this.tiModel.count}`)
         .width('100%')
         .height(50)
+        .fontColor(this.tiModel.textColor)
         .textAlign(TextAlign.Center)
         .borderRadius(10)
         .fontSize(20)
         .backgroundColor(Color.White)
         .onClick(() => {
-          this.count++
+          this.tiModel.count++
+          if (this.tiModel.textColor === Color.Black) {
+            this.tiModel.textColor = Color.Blue
+          } else {
+            this.tiModel.textColor = Color.Black
+          }
         })
 
-      Row() {
+      Row({ space: 10 }) {
         IconTextItem({ image: $r('app.media.app_icon'), text: this.textA })
           .layoutWeight(1)
           .onClick(() => {
-            this.textA = 'X'
+            this.textA = 'x'
           })
         IconTextItem({ image: $r('app.media.app_icon'), text: this.textB })
           .layoutWeight(1)
           .onClick(() => {
-            this.textB = 'X'
+            this.textB = 'x'
           })
         IconTextItem({ image: $r('app.media.app_icon'), text: this.textC })
           .layoutWeight(1)
           .onClick(() => {
-            this.textC = 'X'
+            this.textC = 'x'
           })
       }
       .width('100%')
@@ -72,13 +78,13 @@ struct SampleUiWidget {
 @Component
 struct IconTextItem {
   image: string | PixelMap | Resource
-  text: string
+  @Prop text: string
 
   build() {
     Column() {
       Image(this.image)
-        .width(100)
-        .height(100)
+        .width('100%')
+        .aspectRatio(1)
 
       Text(this.text)
         .fontColor(Color.Black)
@@ -87,7 +93,6 @@ struct IconTextItem {
     }
     .alignItems(HorizontalAlign.Center)
   }
-
 }
 
 
@@ -102,3 +107,8 @@ function showToast() {
   }
 }
 
+
+interface CountTextModel {
+  textColor: Color,
+  count: number,
+}
