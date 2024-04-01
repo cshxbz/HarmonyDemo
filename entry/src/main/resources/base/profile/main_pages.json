@@ -5,6 +5,7 @@
     "pages/AsyncTaskTest",
     "pages/EventHubTest",
     "pages/PermissionsTest",
-    "pages/FileDownloadTest"
+    "pages/FileDownloadTest",
+    "pages/WebComponent"
   ]
 }

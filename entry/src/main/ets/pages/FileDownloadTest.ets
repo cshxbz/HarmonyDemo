@@ -2,6 +2,7 @@ import common from '@ohos.app.ability.common';
 import request from '@ohos.request';
 import { logUtil } from 'app_base_lib'
 import fs from '@ohos.file.fs';
+import taskpool from '@ohos.taskpool';
 
 @Entry
 @Component
@@ -89,11 +90,14 @@ struct FileDownloadTest {
 
     let filePath = `${filesDir}/sample.jpg`
 
-    //删除文件，如果文件已存在，会报下载失败
-    await fs.unlink(filePath)
+    try {
+      await fs.unlink(filePath)
+    } catch (err) {
+      logUtil.i(this.logTag, `unlink err: ${err.code} -- ${err.message}`)
+    }
 
     try {
-      this.downloadTask = await request.downloadFile(this.context, { url: url, filePath: filePath })
+      this.downloadTask = await request.downloadFile(this.context, { url: url, filePath: filePath, background: true })
       this.downloadTask.on('progress', (receivedSize, totalSize) => {
         logUtil.i(this.logTag, `on progress -- receivedSize: ${receivedSize} , totalSize: ${totalSize}`)
         this.progressPercent = (receivedSize / totalSize) * 100
